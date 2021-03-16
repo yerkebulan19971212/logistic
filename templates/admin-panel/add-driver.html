@@ -1,0 +1,55 @@
+{% extends "admin-panel/layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="row">
+        <a href="/admin-panel/driver" class="btn confirm-delete" style="background-color: #ab47bc; margin-left: 30px; font-weight: bold;">Водители</a>
+    </div>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">{{ action }} водителя</h4>
+                  <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                        <div class="col-md-6 mt-5">
+                            <form method='POST' enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group mt-5">
+                                    <label>Имя</label>
+                                    <input type="text" class="form-control" name="first_name" value="{{ ProductModel.first_name }}" placeholder="" required>
+                                </div>
+                                <div class="form-group mt-5">
+                                    <label>Фамилия</label>
+                                    <input type="text" class="form-control" style="box-shadow : none; " name="last_name" value="{{ ProductModel.last_name }}" placeholder="" required>
+                                </div>
+                               <div class="mt-5">
+                                    <label for="driver">Пол</label>
+                                    <select class="form-control" name="gender" id="">
+                                        {% if ProductModel.gender %}
+                                             <option value="{{ ProductModel.gender }}">{{ ProductModel.get_gender_display }} - > Текущий</option>
+                                        {% endif %}
+                                        <option value="Male">Мужчина</option>
+                                        <option value="Female">Женчина</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-5">Сохранить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

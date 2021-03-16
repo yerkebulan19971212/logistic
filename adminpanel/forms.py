@@ -1,6 +1,6 @@
 from django import forms
 
-from cars.models import Car
+from cars.models import *
 from .models import *
 
 
@@ -15,6 +15,11 @@ class CarsCreate(forms.ModelForm):
         model = Car
         fields = ['photo', 'driver', 'mark', 'color', 'number']
 
+
+class DriverCreate(forms.ModelForm):
+    class Meta:
+        model = Driver
+        fields = ['first_name', 'last_name', 'gender']
 
 # class IssueCreate(forms.ModelForm):
 #     class Meta:

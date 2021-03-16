@@ -11,54 +11,55 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Редактировать профиль</h4>
+                  <h4 class="card-title">Профиль</h4>
                   <p class="card-category">Заполните свой профиль</p>
                 </div>
                 <div class="card-body">
                   <form>
+                      <br>
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating">ID пользователя (disabled)</label>
+                          <label class="bmd-label-floating">ID пользователя</label>
                           <input type="text" class="form-control" disabled value="{{ request.user.id }}">
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Имя пользователя</label>
-                          <input type="text" class="form-control" value="{{ request.user.username }}">
+                          <input type="text" class="form-control" disabled value="{{ request.user.username }}">
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">Адрес электронной почты</label>
-                          <input type="email" class="form-control" value="{{ request.user.email }}">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Имя</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Фамилия</label>
-                          <input type="text" class="form-control">
+                          <input type="email" class="form-control" disabled value="{{ request.user.email }}">
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
+                          <label class="bmd-label-floating">Имя</label>
+                          <input type="text" class="form-control" disabled value="Админстратор">
+                        </div>
+                      </div>
+{#                      <div class="col-md-6">#}
+{#                        <div class="form-group">#}
+{#                          <label class="bmd-label-floating">Фамилия</label>#}
+{#                          <input type="text" class="form-control">#}
+{#                        </div>#}
+{#                      </div>#}
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
                           <label class="bmd-label-floating">Адрес</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" disabled value="р. Малая Алматинка, Алматы">
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-right">Обновить профиль</button>
+{#                    <button type="submit" class="btn btn-primary pull-right">Обновить профиль</button>#}
                     <div class="clearfix"></div>
                   </form>
                 </div>

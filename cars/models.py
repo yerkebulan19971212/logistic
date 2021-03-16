@@ -3,8 +3,8 @@ from django.db import models
 
 class Driver(models.Model):
     GENDER_CHOICE = [
-        ('Male', 'мужской'),
-        ('Female', 'женский'),
+        ('Male', 'Мужчина'),
+        ('Female', 'Женчина'),
     ]
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
