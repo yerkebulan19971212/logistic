@@ -30,7 +30,7 @@ def index(request):
 
 
 urlpatterns = [
-    path('', index),
+    path('', index, name='main'),
     path('admin/', admin.site.urls),
     path("admin-panel/", include("authentication.urls")),  # Auth routes - login / register
     path("admin-panel/", include("adminpanel.urls")),

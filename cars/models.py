@@ -34,9 +34,10 @@ class Order(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     fromm = models.CharField(max_length=255, default='')
     to = models.CharField(max_length=255, default='')
-    time = models.DateTimeField()
+    time = models.DateTimeField(null=True)
+    email = models.EmailField(null=True)
     order_time = models.DateTimeField()
-    datetime = models.DateTimeField(auto_created=True)
+    datetime = models.DateTimeField(auto_now=True)
 
 
 class ContactForm(models.Model):

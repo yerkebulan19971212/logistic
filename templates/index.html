@@ -11,7 +11,7 @@
                 <ul class="list-unstyled">
                   <li>
                     <span>Цвет</span>
-                    <span class="spec">{{ car.color }}</span>
+                    <span class="spec" style="background-color: {{ car.color }}; width: 40px; height: 40px; border-radius: 20px;"></span>
                   </li>
                   <li>
                     <span>Номер</span>
@@ -46,7 +46,8 @@
         <div class="row">
           <div class="col-12">
 
-              <form class="trip-form">
+              <form class="trip-form" method="POST" action="{% url 'create_order' %}">
+                  {% csrf_token %}
                 <div class="row align-items-center mb-4">
                   <div class="col-md-6">
                     <h3 class="m-0">Тапсырыс қабылдау формасы</h3>
@@ -58,15 +59,26 @@
                 <div class="row">
                   <div class="form-group col-md-4">
                     <label for="cf-1">Қайдан</label>
-                    <input type="text" id="cf-1" placeholder="Your pickup address" class="form-control">
+                    <input type="text" id="cf-1" name="from" placeholder="Адресіңізді енгізңіз" class="form-control"  required>
                   </div>
                   <div class="form-group col-md-4">
                     <label for="cf-2">Қайда барасыз</label>
-                    <input type="text" id="cf-2" placeholder="Your drop-off address" class="form-control">
+                    <input type="text" id="cf-2" name="to" placeholder="Қайда баратыныңызды енгізңіз" class="form-control" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="cf-3">Баратын күн</label>
-                    <input type="text" id="cf-3" placeholder="Your pickup address" class="form-control datepicker px-3">
+                    <input type="date" id="cf-3" name="date" class="form-control datepicker px-3" required>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="cf-3">Email</label>
+                    <input type="email" id="cf-3" name="email" placeholder="email" class="form-control datepicker px-3" required>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="cf-3">Сервитің типі</label>
+                      <select name="type" id="">
+                          <option value="0">Такси</option>
+                          <option value="1">Доставка</option>
+                      </select>
                   </div>
 {#                  <div class="form-group col-md-3">#}
 {#                    <label for="cf-4">Return date</label>#}
@@ -249,7 +261,7 @@
         </div>
         <div class="step">
           <span class="number"><span>03</span></span>
-          <span class="caption">Егжей</span>
+          <span class="caption">Керекті данныйлар</span>
         </div>
         <div class="step">
           <span class="number"><span>04</span></span>
@@ -257,7 +269,7 @@
         </div>
         <div class="step">
           <span class="number"><span>05</span></span>
-          <span class="caption">Done</span>
+          <span class="caption">Тапсырыныз орындалды</span>
         </div>
 
       </div>
