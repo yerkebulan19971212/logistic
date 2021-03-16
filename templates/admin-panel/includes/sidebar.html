@@ -13,25 +13,31 @@
 {#              <p>Приборная панель</p>#}
 {#            </a>#}
 {#          </li>#}
-          <li class="nav-item {% if 'page-user' in segment %} active {% endif %}">
+          <li class="nav-item {% if 'profile' in segment %} active {% endif %}">
             <a class="nav-link" href="{% url 'profile' %}">
               <i class="material-icons">person</i>
               <p>Профиль</p>
             </a>
           </li>
-          <li class="nav-item {% if 'ui-tables' in segment %} active {% endif %}">
+          <li class="nav-item {% if 'car' in segment %} active {% endif %}">
             <a class="nav-link" href="{% url 'admin-car' %}">
               <i class="material-icons">content_paste</i>
               <p>Машины</p>
             </a>
           </li>
-          <li class="nav-item {% if 'ui-typography' in segment %} active {% endif %}">
+            <li class="nav-item {% if 'driver' in segment %} active {% endif %}">
+                <a class="nav-link" href="{% url 'admin-driver' %}">
+                <i class="material-icons">content_paste</i>
+                <p>Водители</p>
+            </a>
+          </li>
+          <li class="nav-item {% if 'requests' in segment %} active {% endif %}">
             <a class="nav-link" href="{% url 'requests' %}">
               <i class="material-icons">library_books</i>
               <p>Заказы</p>
             </a>
           </li>
-         <li class="nav-item {% if 'ui-icons' in segment %} active {% endif %}">
+         <li class="nav-item {% if 'contactforms' in segment %} active {% endif %}">
             <a class="nav-link" href="{% url 'contactforms' %}">
               <i class="material-icons">bubble_chart</i>
               <p>Обратная связь</p>
