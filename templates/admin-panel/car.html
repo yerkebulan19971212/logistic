@@ -1,0 +1,99 @@
+{% extends "admin-panel/layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="row">
+        <a href="/admin-panel/add-car" class="btn confirm-delete" style="background-color: #ab47bc; margin-left: 30px; font-weight: bold;">Добавить машину</a>
+    </div>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Машины</h4>
+                  <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          Фото
+                        </th>
+                        <th>
+                          Водитель
+                        </th>
+                        <th>
+                          Марка
+                        </th>
+                        <th>
+                          Цвет
+                        </th>
+                        <th>
+                          Номер
+                        </th>
+                        <th>
+                          Операции
+                        </th>
+                      </thead>
+                      <tbody>
+                        {% for l in list %}
+                            <tr>
+                                <td><img src="/media/{{ l.photo }}" alt="" width="80" height="80"></td>
+                                <td>{{ l.driver }}</td>
+                                <td>{{ l.mark }}</td>
+                                <td style="padding: 20px;">
+                                    <div style="background-color: {{ l.color }}; width: 50px;height: 40px; border-radius: 40px;"></div>
+                                </td>
+                                <td>{{ l.number }}</td>
+                                <td>
+                                    <a href="car/update/{{ l.id }}" class="btn btn-warning"
+                                                           id='{{ l.id }}'>Обновить</a>
+                                    <a href="car/delete/{{ l.id }}"
+                                                           class="btn btn-danger confirm-delete"
+                                                           data-toggle="modal" data-target="#confirmDeleteModal"
+                                                           id='deleteButton{{ l.id }}'>Удалить</a>
+                                </td>
+                            </tr>
+                         {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" caller-id="" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body confirm-delete">
+                        Вы точно хотите удалить?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                id="confirmDeleteButtonModal">Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}<script type="text/javascript">
+    $(document).on('click', '.confirm-delete', function () {
+        $("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
+    });
+
+    $(document).on('click', '#confirmDeleteButtonModal', function () {
+        var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
+        window.location = $("#".concat(caller)).attr("href");
+    });
+</script>
+{% endblock javascripts %}

@@ -1,0 +1,89 @@
+{% extends "admin-panel/layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Заказы</h4>
+                  <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          Категория
+                        </th>
+                        <th>
+                          Машина
+                        </th>
+                        <th>
+                          Откуда
+                        </th>
+                        <th>
+                          До
+                        </th>
+                        <th>
+                            Время заказа
+                        </th>
+                        <th>
+                          Когда
+                        </th>
+                      </thead>
+                      <tbody>
+                        {% for l in list %}
+                            <tr>
+                                <td><b style="font-weight: bold">{{ l.get_type_display }}</b></td>
+                                <td>{{ l.car.mark }}</td>
+                                <td>{{ l.fromm }}</td>
+                                <td>{{ l.to }}</td>
+                                <td>{{ l.datetime }}</td>
+                                <td>{{ l.order_time }}</td>
+                            </tr>
+                         {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" caller-id="" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body confirm-delete">
+                        Вы точно хотите удалить?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                id="confirmDeleteButtonModal">Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).on('click', '.confirm-delete', function () {
+        $("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
+    });
+
+    $(document).on('click', '#confirmDeleteButtonModal', function () {
+        var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
+        window.location = $("#".concat(caller)).attr("href");
+    });
+</script>
+{% endblock javascripts %}

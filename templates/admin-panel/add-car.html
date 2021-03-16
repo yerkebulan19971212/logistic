@@ -1,0 +1,68 @@
+{% extends "admin-panel/layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="row">
+        <a href="/admin-panel/car" class="btn confirm-delete" style="background-color: #ab47bc; margin-left: 30px; font-weight: bold;">Машины</a>
+    </div>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">{{ action }} машину</h4>
+                  <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                        <div class="col-md-6 mt-5">
+                            <form method='POST' enctype="multipart/form-data">
+                                {% csrf_token %}
+                               <div class="mt-1 mb-5">
+                                    <label for="driver">Водитель</label>
+                                    <select class="form-control" name="driver" id="">
+                                        {% if ProductModel.driver %}
+                                             <option value="{{ ProductModel.driver.id }}">{{ ProductModel.driver.first_name }} - > Текущий</option>
+                                        {% endif %}
+                                        {% for l in list %}
+                                            <option value="{{ l.id }}">{{ l.first_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group mt-5">
+                                    <label>Марка</label>
+                                    <input type="text" class="form-control" name="mark" value="{{ ProductModel.mark }}" placeholder="Марка" required>
+                                </div>
+                                <div class="form-group mt-5">
+                                    <label>Цвет</label>
+                                    <input type="color" class="form-control" style="box-shadow : none; " name="color" value="{{ ProductModel.color }}" placeholder="" required>
+                                </div>
+                                <div class="form-group mt-5">
+                                    <label>Номер машины</label>
+                                    <input type="text" class="form-control" name="number" value="{{ ProductModel.number }}" placeholder="" required>
+                                </div>
+                                <br>
+                                <br>
+                                {% if ProductModel.photo %}
+                                    <img src="/media/{{ ProductModel.photo }}" alt="" width="300" height="auto">
+                                    <input type="file" class="form-control" name="photo" >
+                                {% else %}
+                                    <input type="file" class="form-control" name="photo" required>
+                                {% endif %}
+                                <button type="submit" class="btn btn-primary mt-5">Сохранить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

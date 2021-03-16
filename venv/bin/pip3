@@ -1,4 +1,4 @@
-#!/home/abyer/PycharmProjects/Carservice/venv/bin/python
+#!/home/beka/oobb/logistic/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
