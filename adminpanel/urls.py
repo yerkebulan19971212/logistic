@@ -10,7 +10,7 @@ from adminpanel.views import *
 urlpatterns = [
 
     # The home page
-    path('', index, name='home'),
+    path('', car, name='home'),
     path('profile', profile, name='profile'),
     path('car', car, name='admin-car'),
     path('add-car', add_car, name='admin-add-car'),
