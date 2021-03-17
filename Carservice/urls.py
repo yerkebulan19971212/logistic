@@ -17,6 +17,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import render
+import datetime as dt
 
 from Carservice import settings
 from cars.models import Car
@@ -24,7 +25,8 @@ from cars.models import Car
 
 def index(request):
     car = Car.objects.all().last()
-    car_count = Car.objects.all().count()
+    now = dt.datetime.now()
+    car_count = Car.objects.filter(order__datetime__lt=now).distinct().count()
     context = {'page': 'home', 'car': car, 'car_count': car_count}
     return render(request, 'index.html', context=context)
 

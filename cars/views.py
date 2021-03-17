@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Order, Car, Driver
+from .models import Order, Car, Driver, ContactForm
 import datetime as dt
 from django.db.models import Max
 import random
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def contact(request):
@@ -14,7 +17,8 @@ def service(request):
 
 
 def cars(request):
-    return render(request, 'cars.html', {"page": "cars"})
+    cars = Car.objects.all()
+    return render(request, 'cars.html', {"page": "cars", "cars": cars})
 
 
 def about(request):
@@ -45,10 +49,34 @@ def create_order(request):
     cars = Car.objects.filter(order__datetime__date__lte=date_time)
     if cars:
         car = get_random_car(cars)
-
-    if not car:
-        pass  # send to email that car is null
+        if not car:
+            messages.error(request, "бос машина жок")
+            text = "k"
+        else:
+            order = Order.objects.create(car=car, type=type_service, order_time=date, fromm=from_p, to=to, email=email)
+            order_detals = Order.objects.filter(pk=order.pk).first()
+            messages.error(request, "Барлық данныйларды email-ңізге жбердік")
+            text = "\n".join([order_detals.car.mark, order_detals.fromm, order_detals.to, order_detals.time,
+                              order_detals.datetime, order_detals.get_type_display(), ])
     else:
-        Order.objects.create(car=car, type=type_service, order_time=date, fromm=from_p, to=to, email=email)
+        messages.error(request, "бос машина жок")
+        text = "f"
+    send_mail(
+        'Машина жалдау',
+        text,
+        settings.EMAIL_HOST_USER,
+        [email],
+    )
 
     return redirect('main')
+
+
+def send_support(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        phone = request.POST.get("phone")
+        email = request.POST.get("email")
+        description = request.POST.get("description")
+        ContactForm.objects.create(name=name, phone=phone,
+                                   email=email, description=description)
+        return redirect('contact')

@@ -23,30 +23,31 @@
       </div>
         <div class="row">
           <div class="col-lg-8 mb-5" >
-            <form action="#" method="post">
+            <form action="{% url 'send_support' %}" method="post">
+                {% csrf_token %}
               <div class="form-group row">
                 <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="Атыңыз">
+                  <input type="text" class="form-control" name="name" placeholder="Атыңыз">
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" placeholder="Тегіңіз">
+                  <input type="tel" class="form-control" name="phone" placeholder="Телефон">
                 </div>
               </div>
 
               <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="text" class="form-control" placeholder="Email">
+                  <input type="text" class="form-control" name="email" placeholder="Email">
                 </div>
               </div>
 
               <div class="form-group row">
                 <div class="col-md-12">
-                  <textarea name="" id="" class="form-control" placeholder="Хабарламаңызды жазыңыз." cols="30" rows="10"></textarea>
+                  <textarea name="description" id="" class="form-control" placeholder="Хабарламаңызды жазыңыз." cols="30" rows="10"></textarea>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-md-6 mr-auto">
-                  <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Send Message">
+                  <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Жіберу">
                 </div>
               </div>
             </form>
