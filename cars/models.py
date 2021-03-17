@@ -30,7 +30,12 @@ class Order(models.Model):
         (0, 'Такси'),
         (1, 'Доставка'),
     ]
+    city_type_field = [
+        (0, 'Қалалар арасында'),
+        (1, 'Қала ішінде'),
+    ]
     type = models.IntegerField(choices=TypeFileds, default=0)
+    city_type = models.IntegerField(choices=city_type_field, default=0)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     fromm = models.CharField(max_length=255, default='')
     to = models.CharField(max_length=255, default='')

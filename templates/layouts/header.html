@@ -15,10 +15,9 @@
           <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
             <ul class="site-menu main-menu js-clone-nav ml-auto ">
               <li class="{% if page == 'home' %} active {% endif %}"><a href="/" class="nav-link">Басты бет</a></li>
-              <li class="{% if page == 'services' %} active {% endif %}"><a href="{% url 'service' %}" class="nav-link">Қызметтер</a></li>
+{#              <li class="{% if page == 'services' %} active {% endif %}"><a href="{% url 'service' %}" class="nav-link">Қызметтер</a></li>#}
               <li class="{% if page == 'cars' %} active {% endif %}"><a href="{% url 'cars' %}" class="nav-link">Машиналар</a></li>
               <li class="{% if page == 'about' %} active {% endif %}"><a href="{% url 'about' %}" class="nav-link">Біз туралы</a></li>
-              <li class="{% if page == 'blog' %} active {% endif %}"><a href="{% url 'blog' %}" class="nav-link">Блог</a></li>
               <li class="{% if page == 'contact' %} active {% endif %}"><a href="{% url 'contact' %}" class="nav-link">Байлныс</a></li>
             </ul>
           </nav>

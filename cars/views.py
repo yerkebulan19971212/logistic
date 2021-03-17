@@ -42,10 +42,17 @@ def get_random_car(cars):
 def create_order(request):
     from_p = request.POST.get('from')
     to = request.POST.get('to')
+    city_type = request.POST.get('city_type')
     date = request.POST.get('date')
     email = request.POST.get('email')
     type_service = request.POST.get('type')
-    date_time = dt.datetime.strptime(date, "%Y-%m-%d").date()
+    date_time = dt.datetime.strptime(date, "%Y-%m-%dT%H:%M")
+    # date_time = dt.datetime.combine(date_time, dt.datetime.min.time())
+    if int(city_type) == 1:
+        time_date_time = date_time + dt.timedelta(hours=2)
+    else:
+        time_date_time = date_time + dt.timedelta(days=1)
+    print(time_date_time)
     cars = Car.objects.filter(order__datetime__date__lte=date_time)
     if cars:
         car = get_random_car(cars)
@@ -53,11 +60,12 @@ def create_order(request):
             messages.error(request, "бос машина жок")
             text = "k"
         else:
-            order = Order.objects.create(car=car, type=type_service, order_time=date, fromm=from_p, to=to, email=email)
+            order = Order.objects.create(city_type=city_type, car=car, type=type_service, order_time=date,
+                                         time=time_date_time, fromm=from_p, to=to, email=email)
             order_detals = Order.objects.filter(pk=order.pk).first()
             messages.error(request, "Барлық данныйларды email-ңізге жбердік")
-            text = "\n".join([order_detals.car.mark, order_detals.fromm, order_detals.to, order_detals.time,
-                              order_detals.datetime, order_detals.get_type_display(), ])
+            text = "\n".join([order_detals.car.mark, order_detals.fromm, order_detals.to, str(order_detals.time),
+                              str(order_detals.datetime), order_detals.get_type_display(), ])
     else:
         messages.error(request, "бос машина жок")
         text = "f"
