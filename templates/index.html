@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <div class="ftco-blocks-cover-1">
       <div class="ftco-cover-1 overlay" style="background-image: url('/static/images/hero_1.jpg')">
@@ -34,7 +35,7 @@
                 </ul>
                 <div class="d-flex align-items-center bg-light p-3">
                   <span>$150/күніне</span>
-                  <a href="contact.html" class="ml-auto btn btn-primary">Қазір жалға алыңыз</a>
+                  <a id="toCaruber" type="button" href="#" class="ml-auto btn btn-primary">Қазір жалға алыңыз</a>
                 </div>
               </div>
             </div>
@@ -43,7 +44,7 @@
       </div>
     </div>
 
-    <div class="site-section pt-0 pb-0 bg-light">
+    <div id="caruber" class="site-section pt-0 pb-0 bg-light">
       <div class="container">
         <div class="row">
           <div class="col-12">
@@ -326,6 +327,14 @@
 {#        </div>#}
 {#      </div>#}
 {#    </div>#}
+
+    <script>
+     $("#toCaruber").click(function() {
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#caruber").offset().top -100
+            }, 2000);
+        });
+    </script>
 
 
 {% endblock %}
