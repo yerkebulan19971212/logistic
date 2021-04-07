@@ -6,6 +6,9 @@ import random
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+import random
+from django.utils.html import format_html
+
 
 
 def contact(request):
@@ -47,12 +50,13 @@ def create_order(request):
     email = request.POST.get('email')
     type_service = request.POST.get('type')
     date_time = dt.datetime.strptime(date, "%Y-%m-%dT%H:%M")
-    # date_time = dt.datetime.combine(date_time, dt.datetime.min.time())
     if int(city_type) == 1:
+        price = random.randint(400, 1500)
         time_date_time = date_time + dt.timedelta(hours=2)
     else:
+        price = random.randint(3000, 10000)
         time_date_time = date_time + dt.timedelta(days=1)
-    print(time_date_time)
+    price_text = 'Цена за услугу :' + str(price) + 'тг'
     cars = Car.objects.filter(order__datetime__date__lte=date_time)
     if cars:
         car = get_random_car(cars)
@@ -61,8 +65,9 @@ def create_order(request):
             text = "k"
         else:
             order = Order.objects.create(city_type=city_type, car=car, type=type_service, order_time=date,
-                                         time=time_date_time, fromm=from_p, to=to, email=email)
+                                         time=time_date_time, fromm=from_p, to=to, email=email, price=price)
             order_detals = Order.objects.filter(pk=order.pk).first()
+            messages.info(request, price_text)
             messages.error(request, "Барлық данныйларды email-ңізге жбердік")
             text = "\n".join([order_detals.car.mark, order_detals.fromm, order_detals.to, str(order_detals.time),
                               str(order_detals.datetime), order_detals.get_type_display(), ])
