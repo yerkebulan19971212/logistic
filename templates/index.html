@@ -83,23 +83,31 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="cf-3">Баратын күн</label>
-                    <input type="datetime-local" id="cf-3" name="date" class="form-control datepicker px-3" required>
+                    <input type="datetime-local" id="cf-5" name="date" class="form-control datepicker px-3" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="cf-3">Email</label>
-                    <input type="email" id="cf-3" name="email" placeholder="email" class="form-control datepicker px-3" required>
+                    <input type="email" id="cf-4" name="email" placeholder="email" class="form-control datepicker px-3" required>
                   </div>
+
                   <div class="form-group col-md-3">
                     <label for="cf-3">Сервитің типі</label>
-                      <select class="form-control" id="exampleFormControlSelect1" name="type" id="">
+                      <select class="form-control" id="exampleFormControlSelect2" name="type" id="">
                           <option value="0">Такси</option>
                           <option value="1">Доставка</option>
                       </select>
                   </div>
 
+                    <div class="form-group col-md-3">
+                    <label for="cf-3">Цена</label>
+                    <input type="hidden" id="cf-price2" name="prices"  placeholder="0" class="form-control datepicker px-3" required>
+                    <input type="text" id="cf-price1" name="" disabled placeholder="0 тг" class="form-control datepicker px-3" required>
+                  </div>
+
                 </div>
                 <div class="row">
                   <div class="col-lg-6">
+                      <button type="button" id="priceKnow" class="btn btn-primary">Бағасын білу</button>
                     <input type="submit" value="Жіберу" class="btn btn-primary">
                   </div>
                 </div>
@@ -188,6 +196,38 @@
                 scrollTop: $("#caruber").offset().top -100
             }, 2000);
         });
+     $('#priceKnow').click(function() {
+         var max = 0;
+         var price = 0;
+         var addressTo = document.getElementById('cf-2').value
+         var addressFrom = document.getElementById('cf-1').value
+         var addressDate = document.getElementById('cf-5').value
+         var addressEmail = document.getElementById('cf-4').value
+         var select_city = document.getElementById('exampleFormControlSelect1').value
+         var select_type = document.getElementById('exampleFormControlSelect2').value
+
+
+         if ( select_type == 0) max += 400
+         else max += 450
+         if(select_city == 1) {
+             max += 0
+             price = getRandomArbitrary(max, 2000)
+         }
+         else {
+             max += 2000
+             price = getRandomArbitrary(max, 10000)
+         }
+         function getRandomArbitrary(min, max) {
+          return Math.floor(Math.random() * (max - min + 1))  + min;
+        }
+
+        if (addressTo === '' || addressDate === '' || addressFrom ==='' || addressEmail === '' ){
+             alert('Барлық поляларды толтырыңыз' )
+         }else{
+            document.getElementById('cf-price1').value = price + " тг";
+            document.getElementById('cf-price2').value = price;
+        }
+     })
     </script>
 
 
