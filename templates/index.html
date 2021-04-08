@@ -82,8 +82,12 @@
                     <input type="text" id="cf-2" name="to" placeholder="Қайда баратыныңызды енгізңіз" class="form-control" required>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="cf-3">Баратын күн</label>
-                    <input type="datetime-local" id="cf-5" name="date" class="form-control datepicker px-3" required>
+                    <label for="cf-3">Басталатын күн</label>
+                    <input type="datetime-local" id="cf-6" name="date" class="form-control datepicker px-3" required>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="cf-3">Аяқталатын күн</label>
+                    <input type="datetime-local" id="cf-5" name="date_to" class="form-control datepicker px-3" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="cf-3">Email</label>
@@ -201,27 +205,31 @@
          var price = 0;
          var addressTo = document.getElementById('cf-2').value
          var addressFrom = document.getElementById('cf-1').value
-         var addressDate = document.getElementById('cf-5').value
+         var addressDate_2= document.getElementById('cf-5').value
+         var addressDate_1 = document.getElementById('cf-6').value
          var addressEmail = document.getElementById('cf-4').value
          var select_city = document.getElementById('exampleFormControlSelect1').value
          var select_type = document.getElementById('exampleFormControlSelect2').value
+         var date_1 = new Date(addressDate_1)
+         var date_2 = new Date(addressDate_2)
+         var Difference_In_Time = date_2.getTime() - date_1.getTime();
+         var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+         console.log(Difference_In_Days)
 
 
          if ( select_type == 0) max += 400
-         else max += 450
+         else max += 600
+
          if(select_city == 1) {
              max += 0
-             price = getRandomArbitrary(max, 2000)
          }
          else {
              max += 2000
-             price = getRandomArbitrary(max, 10000)
          }
-         function getRandomArbitrary(min, max) {
-          return Math.floor(Math.random() * (max - min + 1))  + min;
-        }
 
-        if (addressTo === '' || addressDate === '' || addressFrom ==='' || addressEmail === '' ){
+        var price = Difference_In_Days * max
+         if (Difference_In_Days == 0) price = max
+        if (addressTo === '' || addressDate_1 === '' || addressDate_2 === '' || addressFrom ==='' || addressEmail === '' ){
              alert('Барлық поляларды толтырыңыз' )
          }else{
             document.getElementById('cf-price1').value = price + " тг";

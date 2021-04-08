@@ -36,6 +36,9 @@
                         <th>
                           Когда
                         </th>
+                        <th>
+                          Цена
+                        </th>
                       </thead>
                       <tbody>
                         {% for l in list %}
@@ -46,6 +49,7 @@
                                 <td>{{ l.to }}</td>
                                 <td>{{ l.datetime }}</td>
                                 <td>{{ l.order_time }}</td>
+                                <td>{{ l.price }}</td>
                             </tr>
                          {% endfor %}
                       </tbody>

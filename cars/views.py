@@ -49,15 +49,16 @@ def create_order(request):
     prices = request.POST.get('prices')
     print(prices)
     date = request.POST.get('date')
+    time_date_time = request.POST.get('date_to')
     email = request.POST.get('email')
     type_service = request.POST.get('type')
     date_time = dt.datetime.strptime(date, "%Y-%m-%dT%H:%M")
-    if int(city_type) == 1:
-        # price = random.randint(400, 1500)
-        time_date_time = date_time + dt.timedelta(hours=2)
-    else:
-        # price = random.randint(3000, 10000)
-        time_date_time = date_time + dt.timedelta(days=1)
+    # if int(city_type) == 1:
+    #     # price = random.randint(400, 1500)
+    #     time_date_time = date_time + dt.timedelta(hours=2)
+    # else:
+    #     # price = random.randint(3000, 10000)
+    #     time_date_time = date_time + dt.timedelta(days=1)
     price_text = 'Цена за услугу :' + str(prices) + 'тг'
     cars = Car.objects.filter(order__datetime__date__lte=date_time)
     if cars:

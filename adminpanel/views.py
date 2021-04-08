@@ -155,7 +155,7 @@ def contactforms(request):
 
 @login_required(login_url="/admin-panel/login/")
 def requests(request):
-    list = Order.objects.all()
+    list = Order.objects.all().order_by('-pk')
     context = {"list": list, 'segment': 'requests'}
 
     html_template = loader.get_template('admin-panel/requests.html')
