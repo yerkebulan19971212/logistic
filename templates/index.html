@@ -104,7 +104,7 @@
 
                     <div class="form-group col-md-3">
                     <label for="cf-3">Цена</label>
-                    <input type="hidden" id="cf-price2" name="prices"  placeholder="0" class="form-control datepicker px-3" required>
+                    <input type="hidden" id="cf-price2" name="prices"  placeholder="0" class="form-control datepicker px-3" value="0" required>
                     <input type="text" id="cf-price1" name="" disabled placeholder="0 тг" class="form-control datepicker px-3" required>
                   </div>
 
@@ -112,7 +112,7 @@
                 <div class="row">
                   <div class="col-lg-6">
                       <button type="button" id="priceKnow" class="btn btn-primary">Бағасын білу</button>
-                    <input type="submit" value="Жіберу" class="btn btn-primary">
+                    <input type="submit" id="priceKnow2"  value="Жіберу" class="btn btn-primary">
                   </div>
                 </div>
               </form>
@@ -201,6 +201,44 @@
             }, 2000);
         });
      $('#priceKnow').click(function() {
+         var max = 0;
+         var price = 0;
+         var addressTo = document.getElementById('cf-2').value
+         var addressFrom = document.getElementById('cf-1').value
+         var addressDate_2= document.getElementById('cf-5').value
+         var addressDate_1 = document.getElementById('cf-6').value
+         var addressEmail = document.getElementById('cf-4').value
+         var select_city = document.getElementById('exampleFormControlSelect1').value
+         var select_type = document.getElementById('exampleFormControlSelect2').value
+         var date_1 = new Date(addressDate_1)
+         var date_2 = new Date(addressDate_2)
+         var Difference_In_Time = date_2.getTime() - date_1.getTime();
+         var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+         console.log(Difference_In_Days)
+
+
+         if ( select_type == 0) max += 400
+         else max += 600
+
+         if(select_city == 1) {
+             max += 0
+         }
+         else {
+             max += 2000
+         }
+
+        var price = Difference_In_Days * max
+         if (Difference_In_Days == 0) price = max
+        if (addressTo === '' || addressDate_1 === '' || addressDate_2 === '' || addressFrom ==='' || addressEmail === '' ){
+             alert('Барлық поляларды толтырыңыз' )
+         }else{
+            document.getElementById('cf-price1').value = price + " тг";
+            document.getElementById('cf-price2').value = price;
+        }
+     })
+
+
+      $('#priceKnow2').click(function() {
          var max = 0;
          var price = 0;
          var addressTo = document.getElementById('cf-2').value
