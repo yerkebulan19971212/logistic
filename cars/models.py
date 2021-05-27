@@ -42,7 +42,7 @@ class Order(models.Model):
     time = models.DateTimeField(null=True)
     email = models.EmailField(null=True)
     order_time = models.DateTimeField()
-    price = models.IntegerField(default=0)
+    price = models.FloatField(default=0)
     datetime = models.DateTimeField(auto_now=True)
 
 

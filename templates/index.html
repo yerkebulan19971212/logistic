@@ -34,7 +34,7 @@
 {#                  </li>#}
                 </ul>
                 <div class="d-flex align-items-center bg-light p-3">
-                  <span>$150/күніне</span>
+{#                  <span>$150/күніне</span>#}
                   <a id="toCaruber" type="button" href="#" class="ml-auto btn btn-primary">Қазір жалға алыңыз</a>
                 </div>
               </div>
@@ -71,6 +71,14 @@
                       <select class="form-control" id="exampleFormControlSelect1" name="city_type" id="" required>
                           <option value="0">Қалалар арасында</option>
                           <option value="1">Қала ішінде</option>
+                      </select>
+                  </div>
+                    <div class="form-group col-md-3">
+                    <label for="cf-3"></label>
+                      <select class="form-control" id="exampleFormControlSelectcar" name="car"  required>
+                          {% for car in cars %}
+                          <option value="{{ car.id }}">{{ car.mark }}</option>
+                          {% endfor %}
                       </select>
                   </div>
                   <div class="form-group col-md-4">
@@ -213,9 +221,7 @@
          var date_1 = new Date(addressDate_1)
          var date_2 = new Date(addressDate_2)
          var Difference_In_Time = date_2.getTime() - date_1.getTime();
-         var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-         console.log(Difference_In_Days)
-
+         var Difference_In_Days = Difference_In_Time / (1000 * 3600);
 
          if ( select_type == 0) max += 400
          else max += 600
@@ -224,9 +230,8 @@
              max += 0
          }
          else {
-             max += 2000
+             max += 1000
          }
-
         var price = Difference_In_Days * max
          if (Difference_In_Days == 0) price = max
         if (addressTo === '' || addressDate_1 === '' || addressDate_2 === '' || addressFrom ==='' || addressEmail === '' ){
@@ -236,8 +241,6 @@
             document.getElementById('cf-price2').value = price;
         }
      })
-
-
       $('#priceKnow2').click(function() {
          var max = 0;
          var price = 0;
@@ -252,8 +255,6 @@
          var date_2 = new Date(addressDate_2)
          var Difference_In_Time = date_2.getTime() - date_1.getTime();
          var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-         console.log(Difference_In_Days)
-
 
          if ( select_type == 0) max += 400
          else max += 600
@@ -262,7 +263,7 @@
              max += 0
          }
          else {
-             max += 2000
+             max += 1000
          }
 
         var price = Difference_In_Days * max

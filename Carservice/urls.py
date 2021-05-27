@@ -27,9 +27,10 @@ def index(request):
     car = Car.objects.all().last()
     now = dt.datetime.now()
     car_count = Car.objects.filter(order__datetime__lt=now).distinct().count()
+    cars = Car.objects.all()
     if car_count == 0:
         car_count = Car.objects.filter().count()
-    context = {'page': 'home', 'car': car, 'car_count': car_count}
+    context = {'page': 'home', 'cars': cars, 'car': car, 'car_count': car_count}
     return render(request, 'index.html', context=context)
 
 
